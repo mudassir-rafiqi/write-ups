@@ -30,12 +30,12 @@ everything you access online is stored somewhere on the internet.
 
 ## Bandwidth and Throughput :
 
-Bandwidth : it is the rate at which the data is transferred through a medium.
+**Bandwidth :** it is the rate at which the data is transferred through a medium.
 - Kbps :Thousands of Bits Per second
 - Mbps :Millions of Bits Per second
 - Gbps : billions of Bits Per second. 
-Throughput : it is same as bandwidth but it is also influenced by amount of data and latency 
-latency is amount of time ,including delays
+**Throughput :** it is same as bandwidth but it is also influenced by amount of data and latency 
+`latency is amount of time ,including delays`
 
 ## P2P network :
 
@@ -75,6 +75,8 @@ The **IEE 802.11** standard gives rules for wlan environments
 - **Standard channel :** channels are specific frequency ranges , set to auto
 - **SSID Broadcast :** to show our wifi name to devices in range
 
+ ---
+
 # Protocols and models :
 
 Protocols are rules used by networks to communicate with each other ,They include :
@@ -93,7 +95,7 @@ Protocols are rules used by networks to communicate with each other ,They includ
 - Tcp : makes sure packets sent are received and are in order
 - Http : used for web browsing for getting html data
 
-## TCP/IP Model :
+## TCP/IP And OSI Model :
 
 It helps in visualizing how protocols work with each other to establish a communication . it shows work of protocols occuring in each layer and shows how they work with above and below layer  
 They benefit us in : 
@@ -101,3 +103,28 @@ They benefit us in :
 - helps in editing or changing anything in a layer without disturbing others
 - common language to describe networking functions and capabilities
 
+First protocol modes was made in 1970s with 4 layers called internet model and tcp/ip model uses same layout so its often called tcp/ip model 
+
+### TCP/IP Model :
+
+Tcp/ip model has 4 layers and it is a practical model which is used in making protocols 
+
+1. **Application Layer :** shows data to user and does encoding ,dialog control.
+2. **Transport Layer :** it ensures reliable communication between the sender and receiver
+3. **Internet Layer :** finds the shortest path in the network for the communication
+4. **Network Access Layer :** it handles physical transmission of media like transferring by electric signals etc and also does framing of data
+
+### OSI Model :
+
+osi model has 7 layers and it is not practical it shows clearly how protocol models work so its mainly used for learning purposes also its a reference model like it tells what function each layer should do but now how it should do . it is used for data network design ,troubleshooting and for operation specifications
+
+1. **Application Layer :** provides process to process communication like when we open a webpage and http protocol shows the html data
+2. **Presentation Layer :** it makes sure that both sender and receiver have the same representation,format or appearance of data which was transferred between application layer
+3. **Session layer :** it starts and ends the communication session and controls communication flow like full duplex means both send at a time and half duplex means one sends at a time 
+4. **Transport Layer :** it breaks data into segments and also reassembles them .it also check if data is arrived correctly 
+5. **Internet Layer :** Provides service to send pieces of data over the network .It handles the ip adressing and routing . finds the best path to transfer the data 
+6. **Data Link Layer :** it describes method for transferring frames to local network
+7. **Physical Layer :** It is responsible for transferring raw bits through physical media by electrical or light signals or radio waves , it is responsible for all the hardware related things
+
+
+![models](images/models.png)
