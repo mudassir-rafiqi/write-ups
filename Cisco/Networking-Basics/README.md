@@ -7,7 +7,8 @@ This repository contains my learning from the networking basics Course from cisc
 # Table of Contents
 
 - [Basics](#basics-)
-- [Wireless-Networks](#wireless-networks-)
+- [Wireless Networks](#wireless-networks-)
+- [TCP/IP And OSI Model](#tcpip-and-osi-model-)
 
 ---
 # Basics :
@@ -30,11 +31,11 @@ everything you access online is stored somewhere on the internet.
 
 ## Bandwidth and Throughput :
 
-**Bandwidth :** it is the rate at which the data is transferred through a medium.
+1. **Bandwidth :** it is the rate at which the data is transferred through a medium.
 - Kbps :Thousands of Bits Per second
 - Mbps :Millions of Bits Per second
-- Gbps : billions of Bits Per second. 
-**Throughput :** it is same as bandwidth but it is also influenced by amount of data and latency 
+- Gbps : billions of Bits Per second
+2. **Throughput :** it is same as bandwidth but it is also influenced by amount of data and latency 
 `latency is amount of time ,including delays`
 
 ## P2P network :
@@ -126,5 +127,41 @@ osi model has 7 layers and it is not practical it shows clearly how protocol mod
 6. **Data Link Layer :** it describes method for transferring frames to local network
 7. **Physical Layer :** It is responsible for transferring raw bits through physical media by electrical or light signals or radio waves , it is responsible for all the hardware related things
 
+Osi layers explain what each layers should actually do 
 
 ![models](images/models.png)
+
+## Encapsulation :
+encapsulation means adding of information like headers to data for sending like in osi model the data goes like this <br>
+- first the application layers takes the data and passes it
+- then the transport layer makes segments of the data 
+- then the internet layer adds ip adressing and routing data and makes data packets
+- then the data link layer makes frames of the data to send it to router
+- then the data is sent through bits by physical layer
+
+Each layer encapsulates the data for adding necessary information
+## Ethernet Frame :
+
+Frames are data packets which it gets from layer 3 it sends them to the router , from nic to nic 
+`nic is network interface card which assigns mac adress to a pc `  <br>
+
+**Fields of ethernet frame :**
+- Preamble : to receive the bits in sync coming by nic
+- start frame delimiter (Sfd): to tell after this is the data to be sent
+- destination mac address
+- source mac adress
+- length and type of the data
+- Data
+- frame check sequence (Fcs): checks if the data is arrived without erros
+
+## Ethernet Switches
+
+ethernet switches are like routers without wifi they have ethernet ports so devices connect through them for internet
+
+- ethernet switches save mac adresses of source which send frames and they make a mac adress table like that 
+- when a frame is sent with a destination mac adress not saved in mac adress table the switch will send the frame to all the devices and they device with the destination mac will accept it and others will ignore it
+- when a frame with destination ip saved in mac adress table comes 
+
+---
+
+# IPv4 And IPv6
