@@ -9,6 +9,8 @@ This repository contains my learning from the networking basics Course from cisc
 - [Basics](#basics-)
 - [Wireless Networks](#wireless-networks-)
 - [TCP/IP And OSI Model](#tcpip-and-osi-model-)
+- [Ethernet Switches](#ethernet-switches)
+- [IPv4 And IPv6](#ipv4-and-ipv6)
 
 ---
 # Basics :
@@ -86,13 +88,13 @@ Protocols are rules used by networks to communicate with each other ,They includ
 - **Message Size :** rules on how much the msg size should be , if the msg is big it will have to be broken in pieces to send.
 - **Timing :** it synchronises sender and receiver , when to send data and how fast to send and waitng for devices for responses
 - **Encoding :** Msgs sent are converted into bits so they can be sent through electric or light signals or radio waves which are decoded by the receiver
-- **Encapsulation :** it adds header to the messages transmitted . it contains source and destinatio adress etc
+- **Encapsulation :** it adds header to the messages transmitted . it contains source and destinatio address etc
 - **Message Pattern :** some msgs require ack (acknowledgement ) before sending another and some just send without ack.
 
-### Commom Ethernet Protocols :
+### Common Ethernet Protocols :
 
 - Ethernet : for communication in lan
-- ip : internet protocol handles routing and adresses
+- ip : internet protocol handles routing and addresses
 - Tcp : makes sure packets sent are received and are in order
 - Http : used for web browsing for getting html data
 
@@ -123,7 +125,7 @@ osi model has 7 layers and it is not practical it shows clearly how protocol mod
 2. **Presentation Layer :** it makes sure that both sender and receiver have the same representation,format or appearance of data which was transferred between application layer
 3. **Session layer :** it starts and ends the communication session and controls communication flow like full duplex means both send at a time and half duplex means one sends at a time 
 4. **Transport Layer :** it breaks data into segments and also reassembles them .it also check if data is arrived correctly 
-5. **Internet Layer :** Provides service to send pieces of data over the network .It handles the ip adressing and routing . finds the best path to transfer the data 
+5. **Internet Layer :** Provides service to send pieces of data over the network .It handles the ip addressing and routing . finds the best path to transfer the data 
 6. **Data Link Layer :** it describes method for transferring frames to local network
 7. **Physical Layer :** It is responsible for transferring raw bits through physical media by electrical or light signals or radio waves , it is responsible for all the hardware related things
 
@@ -135,7 +137,7 @@ Osi layers explain what each layers should actually do
 encapsulation means adding of information like headers to data for sending like in osi model the data goes like this <br>
 - first the application layers takes the data and passes it
 - then the transport layer makes segments of the data 
-- then the internet layer adds ip adressing and routing data and makes data packets
+- then the internet layer adds ip addressing and routing data and makes data packets
 - then the data link layer makes frames of the data to send it to router
 - then the data is sent through bits by physical layer
 
@@ -143,25 +145,131 @@ Each layer encapsulates the data for adding necessary information
 ## Ethernet Frame :
 
 Frames are data packets which it gets from layer 3 it sends them to the router , from nic to nic 
-`nic is network interface card which assigns mac adress to a pc `  <br>
+`nic is network interface card which assigns mac address to a pc `  <br>
 
 **Fields of ethernet frame :**
 - Preamble : to receive the bits in sync coming by nic
 - start frame delimiter (Sfd): to tell after this is the data to be sent
 - destination mac address
-- source mac adress
+- source mac address
 - length and type of the data
 - Data
 - frame check sequence (Fcs): checks if the data is arrived without erros
+
+---
 
 ## Ethernet Switches
 
 ethernet switches are like routers without wifi they have ethernet ports so devices connect through them for internet
 
-- ethernet switches save mac adresses of source which send frames and they make a mac adress table like that 
-- when a frame is sent with a destination mac adress not saved in mac adress table the switch will send the frame to all the devices and they device with the destination mac will accept it and others will ignore it
-- when a frame with destination ip saved in mac adress table comes 
+- ethernet switches save mac addresses of source which send frames and they make a mac address table like that 
+- when a frame is sent with a destination mac address not saved in mac address table the switch will send the frame to all the devices and they device with the destination mac will accept it and others will ignore it
+- when a frame with destination ip saved in mac address table comes 
 
 ---
 
 # IPv4 And IPv6
+
+Every device needs an ip address to connect to the internet and to send or receive anything . there is a private ip address in the lan network and public ip address to connect outside the lan
+- ip addresses are of 32 bits in length ,here is a binary representation : `11010001101001011100100000000001`
+- theses are divided in four 8-bit bytes called octets : `11010001.10100101.11001000.00000001`
+- now converting them to their decimal value : `209.165.200.1`
+
+### private adress assignment
+
+for private ip addresses like `192.168.0.1` it has 2 parts network portion and host portion which is defined by subnet masks 
+- here `192.168.0` is network portion and `.1` is host portion
+- we can assign any numbers within `255.255.255.255` as ip address but `192.168.0` is default for many routers
+- this ip is for subnet mask `255.255.255.0/24` which tells first 3 are network portion and last one is host portion , here /24 also tells first 24 bits are network portion 
+- we can also change the subnet mask to increase more devices 
+> 255.255.255.0 - 254 devices
+> 255.255.0.0 - 65,534 devices
+> 255.0.0.0 - 16 million devices
+
+### Private Address Range
+
+| Network Address and Prefix | RFC 1918 Private Address Range |
+|----------------------------|--------------------------------|
+| `10.0.0.0/8` | `10.0.0.0 - 10.255.255.255` |
+| `172.16.0.0/12` | `172.16.0.0 - 172.31.255.255` |
+| `192.168.0.0/16` | `192.168.0.0 - 192.168.255.255` |
+
+### Public ip assignment
+
+for public ip addresses they are assigned by isps
+- IANA (Internet Assigned Numbers Authority) hands out blocks of ips to regional internet registeries (RIRs)
+- RIRs (Regional Internet Registeries) world is divided into five regions
+- RIRs like APNIC for asia then gives some ip blocks to ISPs
+- ISPs then assign ips by DHCP (Dynamic Host Configuration Protocol)
+
+## network Transmission methods :
+
+**Unicast :** unicast transmission means one device sending a message to another device and the destination address is only of one device and source ip is always one only as packets can come from only one source
+- IPv4 unicast host address range is `1.1.1.1 to 223.255.255.255` but some addresses in between are reserved for different purposes
+
+**Broadcast :** in broadcast transmission a device sends a message to every device on its lan network
+- broadcast destination address is all 1s in the host portion means if the subnet is 255.255.255.0 for ip 192.168.0.1 then 192.168.0.255 is its broadcast address
+- a broadcast message only happens in a subnet if the subnet is 255.255.255.0 it sendds to all 254 devices and if its 255.255.0.0 it sends to all 60k devices
+- however they can be divided by different networks in a router like 192.168.1.x and 192.168.2.x , these are different networks with their own subnet masks 255.255.255.0
+
+**Multicast :** in multicast transmission a device sends a message to all the devices which are subscribed to a multicast group
+- IPv4 has reserved the 224.0.0.0 to 239.255.255.255 addresses as multicast range.
+- clients need to use a program to subscribe to a particular multicast group to receive the transmission
+- ospf routers which communicate with each other to find shortest path to reach some address reserve the multicast address 224.0.0.5
+
+## Broadcast Domains and Segmentation :
+
+in ethernet lan broadcast is used with arp to find mac adresses of known ip adresses .also ip is mostly given by dhcp server so dhcp in a device first sends broadcast to find the dhcp server
+- broadcasts are forwarded by switches if the broadcast is in the same subnet with switches 
+- routers do not forward broadcasts
+
+### large broadcast domain :
+
+large broadcast domain like 400 users may generata excessive broadcast traffic which will slow down the devices .so we need to differentiate them using subnets
+![broadcast1](images/broad1.png) ![broadcast2](images/broad2.png)
+
+> here we can see in first figure we have 400 users on one network with ip 172.16.0.0/16 here subnet mask is 255.255.0.0 which means 65k devices can connect in one network
+> in the second picture we divide the network into subnets with subnet masks 255.255.255.0 which have max 254 devices connecting capacity for each subnet
+
+subnetting reduces overall network traffic and improves network performance it also helps network administrators to keep different rules for different subnets also if anything abnormal happens in a broadcast like abnormat broadcast traffic or misconfiguration it will not affect all users
+
+### various ways of using subnets
+
+![locosub](images/locosub.png) ![grpsub](images/grpsub.png) ![typesub](images/typesub.png)
+
+## Network Address Translation (NAT) :
+
+nat helps in changing your private ip into public ip for sending or receiving on the internet as we can't use our private ip to connect public ips
+- without nat we would have run out of ipv4 addresses if every device had its unique ip , nat on the router level gives every device same public ip but with different ports which is called pat (port address translation)
+
+## Special use ipv4 addresses :
+
+adresses which cannot be assigned to hosts and some can be assigned but with restrictions
+
+### loopback address :
+loopback adress is used by hosts to direct traffic to itself . 
+- loopback address range is from `127.0.0.1 to 127.255.255.254` (127.0.0.0/8)
+- we can use `ping 127.0.0.1` to ping ourself
+
+### link-local address :
+link-local addresses are self assigned addresses . windows self assign link local adress if it did got an ip assigned to itself
+- it is also called automatic private ip adressing (APIPA)
+- its range is from `169.254.0.1 to 169.254.255.254` (169.254.0.0/16)
+
+## Legacy Classfull Adressing :
+
+in 1981 ip adresses were assigned by classfull adressing defined in rfc 790 (https://tools.ietf.org/html/rfc790) . customers were allocated ip adresses based on classes A,B or C they divided it as :
+**Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host adresses per network
+**Class B :** for moderate to large networks with range `128.0.0.0 to 191.255.0.0` which supports more than 65k  host adresses per network
+**Class C :** for small home or office networks with range `192.0.0.0 to 223.255.255.0` which supports only 254  host adresses per network 
+Note : there is also class D as multicast multicast block from 224.0.0.0 to 239.0.0.0 and class E experimental block from 240.0.0.0 - 255.0.0.0 <br>
+At that time it was good for addressing but many ips were being unused as companies who needs only 500 ips got 65k ips hence classles addressing was introduced which can assign any number of ips 
+
+## Need of IPv6 :
+
+IPv4 was running out of addresses as it could have only 4.3 billion addresses . nat helped in slowing the exhaustion of ipv4 addresses but it has its limitations
+> IPv6 is the successor of IPv4 and it has larger 128-bit address space providing 340 undecillion possible addresses
+
+## IPv4 and IPv6 Co-existence :
+
+---
