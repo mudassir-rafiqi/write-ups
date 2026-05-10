@@ -208,14 +208,14 @@ for public ip addresses they are assigned by isps
 - IPv4 unicast host address range is `1.1.1.1 to 223.255.255.255` but some addresses in between are reserved for different purposes
 
 **Broadcast :** in broadcast transmission a device sends a message to every device on its lan network
-- broadcast destination address is all 1s in the host portion means if the subnet is 255.255.255.0 for ip 192.168.0.1 then 192.168.0.255 is its broadcast address
-- a broadcast message only happens in a subnet if the subnet is 255.255.255.0 it sendds to all 254 devices and if its 255.255.0.0 it sends to all 60k devices
-- however they can be divided by different networks in a router like 192.168.1.x and 192.168.2.x , these are different networks with their own subnet masks 255.255.255.0
+- broadcast destination address is all 1s in the host portion means if the subnet is `255.255.255.0` for ip `192.168.0.1` then `192.168.0.255` is its broadcast address
+- a broadcast message only happens in a subnet if the subnet is `255.255.255.0` it sendds to all 254 devices and if its `255.255.0.0` it sends to all 60k devices
+- however they can be divided by different networks in a router like `192.168.1.x` and `192.168.2.x` , these are different networks with their own subnet masks `255.255.255.0`
 
 **Multicast :** in multicast transmission a device sends a message to all the devices which are subscribed to a multicast group
-- IPv4 has reserved the 224.0.0.0 to 239.255.255.255 addresses as multicast range.
+- IPv4 has reserved the `224.0.0.0` to `239.255.255.255` addresses as multicast range.
 - clients need to use a program to subscribe to a particular multicast group to receive the transmission
-- ospf routers which communicate with each other to find shortest path to reach some address reserve the multicast address 224.0.0.5
+- ospf routers which communicate with each other to find shortest path to reach some address reserve the multicast address `224.0.0.5`
 
 ## Broadcast Domains and Segmentation :
 
@@ -225,10 +225,12 @@ in ethernet lan broadcast is used with arp to find mac adresses of known ip adre
 
 ### large broadcast domain :
 
-large broadcast domain like 400 users may generata excessive broadcast traffic which will slow down the devices .so we need to differentiate them using subnets
+large broadcast domain like 400 users may generata excessive broadcast traffic which will slow down the devices .so we need to differentiate them using subnets.
+
 ![broadcast1](images/broad1.png) ![broadcast2](images/broad2.png)
 
-> here we can see in first figure we have 400 users on one network with ip 172.16.0.0/16 here subnet mask is 255.255.0.0 which means 65k devices can connect in one network
+> here we can see in first figure we have 400 users on one network with ip 172.16.0.0/16 here subnet mask is 255.255.0.0 which means 65k devices can connect in one network.
+
 > in the second picture we divide the network into subnets with subnet masks 255.255.255.0 which have max 254 devices connecting capacity for each subnet
 
 subnetting reduces overall network traffic and improves network performance it also helps network administrators to keep different rules for different subnets also if anything abnormal happens in a broadcast like abnormat broadcast traffic or misconfiguration it will not affect all users
@@ -259,10 +261,10 @@ link-local addresses are self assigned addresses . windows self assign link loca
 ## Legacy Classfull Adressing :
 
 in 1981 ip adresses were assigned by classfull adressing defined in rfc 790 (https://tools.ietf.org/html/rfc790) . customers were allocated ip adresses based on classes A,B or C they divided it as :
-**Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host adresses per network
-**Class B :** for moderate to large networks with range `128.0.0.0 to 191.255.0.0` which supports more than 65k  host adresses per network
-**Class C :** for small home or office networks with range `192.0.0.0 to 223.255.255.0` which supports only 254  host adresses per network 
-Note : there is also class D as multicast multicast block from 224.0.0.0 to 239.0.0.0 and class E experimental block from 240.0.0.0 - 255.0.0.0 <br>
+1. **Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host adresses per network
+2. **Class B :** for moderate to large networks with range `128.0.0.0 to 191.255.0.0` which supports more than 65k  host adresses per network
+3. **Class C :** for small home or office networks with range `192.0.0.0 to 223.255.255.0` which supports only 254  host adresses per network 
+> Note : there is also class D as multicast multicast block from 224.0.0.0 to 239.0.0.0 and class E experimental block from 240.0.0.0 - 255.0.0.0 <br>
 At that time it was good for addressing but many ips were being unused as companies who needs only 500 ips got 65k ips hence classles addressing was introduced which can assign any number of ips 
 
 ## Need of IPv6 :
