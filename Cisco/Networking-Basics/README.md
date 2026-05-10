@@ -248,12 +248,12 @@ nat helps in changing your private ip into public ip for sending or receiving on
 
 addresses which cannot be assigned to hosts and some can be assigned but with restrictions
 
-### loopback address :
+**loopback address :**
 loopback address is used by hosts to direct traffic to itself . 
 - loopback address range is from `127.0.0.1 to 127.255.255.254` (127.0.0.0/8)
 - we can use `ping 127.0.0.1` to ping ourself
 
-### link-local address :
+**link-local address :**
 link-local addresses are self assigned addresses . windows self assign link local address if it did got an ip assigned to itself
 - it is also called automatic private ip addressing (APIPA)
 - its range is from `169.254.0.1 to 169.254.255.254` (169.254.0.0/16)
@@ -299,25 +299,7 @@ where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
 <details>
 <summary><strong>Hexadecimal Numbering System Table</strong></summary>
 
-
-| Decimal | Binary | Hexadecimal |
-|----------|--------|-------------|
-| 0  | 0000 | 0 |
-| 1  | 0001 | 1 |
-| 2  | 0010 | 2 |
-| 3  | 0011 | 3 |
-| 4  | 0100 | 4 |
-| 5  | 0101 | 5 |
-| 6  | 0110 | 6 |
-| 7  | 0111 | 7 |
-| 8  | 1000 | 8 |
-| 9  | 1001 | 9 |
-| 10 | 1010 | A |
-| 11 | 1011 | B |
-| 12 | 1100 | C |
-| 13 | 1101 | D |
-| 14 | 1110 | E |
-| 15 | 1111 | F |
+![hexadecimal](images/hexadecimal.png)
 
 </details>
 
@@ -363,6 +345,7 @@ here this ip becomes 2002:30f4::430e:0:0
 ```
 
 >ipv6 : 3001:0da8:75a3:0000:0000:8a2e:0370:7334
+
 >compressed : 3001:da8:75a3::8a2e:370:7334
 
 
