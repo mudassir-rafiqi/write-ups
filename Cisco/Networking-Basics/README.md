@@ -299,7 +299,6 @@ where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
 <details>
 <summary><strong>Hexadecimal Numbering System Table</strong></summary>
 
-<br>
 
 | Decimal | Binary | Hexadecimal |
 |----------|--------|-------------|
