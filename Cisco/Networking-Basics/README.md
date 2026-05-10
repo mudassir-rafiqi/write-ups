@@ -68,7 +68,7 @@ When bluetooth is in discoverable mode it sends this data when another bluetooth
 
 ## Wireless Standards :
 
-The **IEE 802.11** standard gives rules for wlan environments
+The **IEEE 802.11** standard gives rules for wlan environments
 - wireless stands use 2.4Ghz and 5Ghz frequency bands
 
 ## wireless Settings :
@@ -175,7 +175,7 @@ Every device needs an ip address to connect to the internet and to send or recei
 - theses are divided in four 8-bit bytes called octets : `11010001.10100101.11001000.00000001`
 - now converting them to their decimal value : `209.165.200.1`
 
-### private adress assignment
+### private address assignment
 
 for private ip addresses like `192.168.0.1` it has 2 parts network portion and host portion which is defined by subnet masks 
 - here `192.168.0` is network portion and `.1` is host portion
@@ -219,7 +219,7 @@ for public ip addresses they are assigned by isps
 
 ## Broadcast Domains and Segmentation :
 
-in ethernet lan broadcast is used with arp to find mac adresses of known ip adresses .also ip is mostly given by dhcp server so dhcp in a device first sends broadcast to find the dhcp server
+in ethernet lan broadcast is used with arp to find mac addresses of known ip addresses .also ip is mostly given by dhcp server so dhcp in a device first sends broadcast to find the dhcp server
 - broadcasts are forwarded by switches if the broadcast is in the same subnet with switches 
 - routers do not forward broadcasts
 
@@ -246,24 +246,24 @@ nat helps in changing your private ip into public ip for sending or receiving on
 
 ## Special use ipv4 addresses :
 
-adresses which cannot be assigned to hosts and some can be assigned but with restrictions
+addresses which cannot be assigned to hosts and some can be assigned but with restrictions
 
 ### loopback address :
-loopback adress is used by hosts to direct traffic to itself . 
+loopback address is used by hosts to direct traffic to itself . 
 - loopback address range is from `127.0.0.1 to 127.255.255.254` (127.0.0.0/8)
 - we can use `ping 127.0.0.1` to ping ourself
 
 ### link-local address :
-link-local addresses are self assigned addresses . windows self assign link local adress if it did got an ip assigned to itself
-- it is also called automatic private ip adressing (APIPA)
+link-local addresses are self assigned addresses . windows self assign link local address if it did got an ip assigned to itself
+- it is also called automatic private ip addressing (APIPA)
 - its range is from `169.254.0.1 to 169.254.255.254` (169.254.0.0/16)
 
-## Legacy Classfull Adressing :
+## Legacy Classfull Addressing :
 
-in 1981 ip adresses were assigned by classfull adressing defined in rfc 790 (https://tools.ietf.org/html/rfc790) . customers were allocated ip adresses based on classes A,B or C they divided it as :
-1. **Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host adresses per network
-2. **Class B :** for moderate to large networks with range `128.0.0.0 to 191.255.0.0` which supports more than 65k  host adresses per network
-3. **Class C :** for small home or office networks with range `192.0.0.0 to 223.255.255.0` which supports only 254  host adresses per network 
+in 1981 ip addresses were assigned by classfull addressing defined in rfc 790 (https://tools.ietf.org/html/rfc790) . customers were allocated ip addresses based on classes A,B or C they divided it as :
+1. **Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host addresses per network
+2. **Class B :** for moderate to large networks with range `128.0.0.0 to 191.255.0.0` which supports more than 65k  host addresses per network
+3. **Class C :** for small home or office networks with range `192.0.0.0 to 223.255.255.0` which supports only 254  host addresses per network 
 > Note : there is also class D as multicast multicast block from 224.0.0.0 to 239.0.0.0 and class E experimental block from 240.0.0.0 - 255.0.0.0 <br>
 At that time it was good for addressing but many ips were being unused as companies who needs only 500 ips got 65k ips hence classles addressing was introduced which can assign any number of ips 
 
@@ -274,4 +274,98 @@ IPv4 was running out of addresses as it could have only 4.3 billion addresses . 
 
 ## IPv4 and IPv6 Co-existence :
 
+both ipv4 and ipv6 are co-existing nowadays it will take many years to fully convert to ipv6 
+- The IETF has created different protocols to help changing or migrating to ipv6 
+
+### 3 Types of Migration Techniques :
+
+1. **Dual Stack :** in dual stack a device has both IPv4 and IPv6 and it uses both to communicate . its called native ipv6 because it has IPv6 connection and can acces IPv6 content.
+2. **Tunneling :** in tunneling we transport ipv6 data over ipv4 network . ipv6 packets are encapsulated in ipv4 packets
+
+![Tunneling](images/tunneling.png)
+
+3. **Translation :** in translation an ipv6 device communicates with ipv4 device with the help of NAT64 which helps in translating IPv6 packets to IPv4 packets and vice versa.
+
+![Translation](images/translation.png)
+
+> Note: tunneling and translation should be used only when needed , goal should be to migrate to IPv6.
+
+### Hexadecimal number system :
+
+hexadecimal number system has numbers 0-9 and letters A-F
+
+where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
+
+<details>
+<summary><strong>Hexadecimal Numbering System Table</strong></summary>
+
+<br>
+
+| Decimal | Binary | Hexadecimal |
+|----------|--------|-------------|
+| 0  | 0000 | 0 |
+| 1  | 0001 | 1 |
+| 2  | 0010 | 2 |
+| 3  | 0011 | 3 |
+| 4  | 0100 | 4 |
+| 5  | 0101 | 5 |
+| 6  | 0110 | 6 |
+| 7  | 0111 | 7 |
+| 8  | 1000 | 8 |
+| 9  | 1001 | 9 |
+| 10 | 1010 | A |
+| 11 | 1011 | B |
+| 12 | 1100 | C |
+| 13 | 1101 | D |
+| 14 | 1110 | E |
+| 15 | 1111 | F |
+
+</details>
+
+## IPv6 :
+
+```3001:0da8:75a3:0000:0000:8a2e:0370:7334```
+- ipv6 addresses are of 128 bits in length and are written in strings of hexadecimal values `here 3001 is a string of hexadecimal values`
+- Every four bits is represented by single hexadecimal digit which makes total 32 (128/4) hexadecimal values `in 3001 each digit is a hexadecimal digit like 3,0 and 1`
+- ipv6 addresses are not case sensitive
+- ipv6 have eight 16 bit segments called hextets or four hexadecimal digits 
+
+## IPv6 formatting rules :
+as ipv6 is a large address we got 2 rules to make it shorter
+
+### Rule 1 : Omitting Leading Zeroes
+
+- in the first rule we remove the zeroes from the hextets which are in the starting 
+- we dont remove zeroes if they are after any other digit 
+- if all the four digits are zeroes we keep one zero
+
+``` 
+example ipv6 : 3001:0da8:75a3:0000:0000:8a2e:0370:7334
+from this 0da8 becomes da8
+and 0000 becomes 0
+and 0370 becomes 370
+compressed ip : 3001:da8:0:0:8a2e:370:7334
+```
+
+### Rule 2 : Double Colon :
+
+- in the second rule we remove the hextets which have only zeroes `0000` with double colons `::`
+- if two or more hextets with only zeroes are in a row we replace them all with just double colons
+- but if there are two hextets with only zeroes and there are not together we only replace one of them 
+- if there are some hextets in a row and some less or one hextet with only zeroes we only replace more hextets in a row with only zeroes as double colons
+- we only use double colon one time so we dont have issues while decoding 
+
+```
+example ipv6 : 3001:0da8:75a3:0000:0000:8a2e:0370:7334
+here this ip becomes 3001:0da8:75a3::8a2e:0370:7334
+
+example ipv6 2002:30f4:0000:0000:0000:430e:0000:0000
+here this ip becomes 2002:30f4::430e:0:0
+```
+
+>ipv6 : 3001:0da8:75a3:0000:0000:8a2e:0370:7334
+>compressed : 3001:da8:75a3::8a2e:370:7334
+
+
 ---
+
