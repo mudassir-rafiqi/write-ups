@@ -14,24 +14,24 @@ This repository contains my learning from the networking basics Course from cisc
 
 ---
 # Basics :
-## Who Owns “The Internet”?
+### Who Owns “The Internet”?
 
 Internet is not owned by anybody but its connection of the all the interconnected networks , they are connected by optical-fibre cables , telephone wires , wireless transmissions and sattelite links.
 everything you access online is stored somewhere on the internet.
 
-## Types of Personal Data :
+### Types of Personal Data :
 
 1. **Volunteered Data :** Data shared by the person itself by creating a social media profile or uploading online somewhere
 2. **Observed Data :** the data captured by recording actions of individuals such as location data 
 3. **Inferred Data :** The data taken by analysis of volunteered and observed data
 
-## Signal Transmission :
+### Signal Transmission :
 
 1. **Electric Signals :** transmission is throuh electric pulses used in copper wires
 2. **optical signal :** transmission is through light pulses used in optical fibres
 3. **wireless signal :** transmission is through infrared ,microwave , radio waves through air
 
-## Bandwidth and Throughput :
+### Bandwidth and Throughput :
 
 1. **Bandwidth :** it is the rate at which the data is transferred through a medium.
 - Kbps :Thousands of Bits Per second
@@ -40,15 +40,15 @@ everything you access online is stored somewhere on the internet.
 2. **Throughput :** it is same as bandwidth but it is also influenced by amount of data and latency 
 `latency is amount of time ,including delays`
 
-## P2P network :
+### P2P network :
 
 Peer to Peer network is when computers are both client and host and share different things with each other
 
-## Cisco Packet Tracer Symbols
+### Cisco Packet Tracer Symbols
 
 ![Symbols](images/symbols.png)
 
-## ISP (Internet Service Provider) :
+### ISP (Internet Service Provider) :
 
 Internet Service provider links networks with the internet , ISPs are connected with each other to form the internet , They use Fiber-optic cables
 
@@ -66,12 +66,12 @@ When bluetooth is in discoverable mode it sends this data when another bluetooth
 - technical info ,such as features or BT specs.
 1. **NFC :** Near-field communication is very short range wireless technology used for payments .it uses elctromagnetic fields to transmit data
 
-## Wireless Standards :
+### Wireless Standards :
 
 The **IEEE 802.11** standard gives rules for wlan environments
 - wireless stands use 2.4Ghz and 5Ghz frequency bands
 
-## wireless Settings :
+### wireless Settings :
 
 - **Network Mode :** like 802.11ac,802.11b or mixed mode
 - **Network Name (SSID) :** (service set identifier ) names of the wifi like home etc
@@ -133,7 +133,7 @@ Osi layers explain what each layers should actually do
 
 ![models](images/models.png)
 
-## Encapsulation :
+### Encapsulation :
 encapsulation means adding of information like headers to data for sending like in osi model the data goes like this <br>
 - first the application layers takes the data and passes it
 - then the transport layer makes segments of the data 
@@ -142,7 +142,7 @@ encapsulation means adding of information like headers to data for sending like 
 - then the data is sent through bits by physical layer
 
 Each layer encapsulates the data for adding necessary information
-## Ethernet Frame :
+### Ethernet Frame :
 
 Frames are data packets which it gets from layer 3 it sends them to the router , from nic to nic 
 `nic is network interface card which assigns mac address to a pc `  <br>
@@ -158,7 +158,7 @@ Frames are data packets which it gets from layer 3 it sends them to the router ,
 
 ---
 
-## Ethernet Switches
+### Ethernet Switches
 
 ethernet switches are like routers without wifi they have ethernet ports so devices connect through them for internet
 
@@ -168,14 +168,14 @@ ethernet switches are like routers without wifi they have ethernet ports so devi
 
 ---
 
-# IPv4 And IPv6
+## IPv4 And IPv6
 
 Every device needs an ip address to connect to the internet and to send or receive anything . there is a private ip address in the lan network and public ip address to connect outside the lan
 - ip addresses are of 32 bits in length ,here is a binary representation : `11010001101001011100100000000001`
 - theses are divided in four 8-bit bytes called octets : `11010001.10100101.11001000.00000001`
 - now converting them to their decimal value : `209.165.200.1`
 
-### private address assignment
+#### private address assignment
 
 for private ip addresses like `192.168.0.1` it has 2 parts network portion and host portion which is defined by subnet masks 
 - here `192.168.0` is network portion and `.1` is host portion
@@ -194,7 +194,7 @@ for private ip addresses like `192.168.0.1` it has 2 parts network portion and h
 | `172.16.0.0/12` | `172.16.0.0 - 172.31.255.255` |
 | `192.168.0.0/16` | `192.168.0.0 - 192.168.255.255` |
 
-### Public ip assignment
+#### Public ip assignment
 
 for public ip addresses they are assigned by isps
 - IANA (Internet Assigned Numbers Authority) hands out blocks of ips to regional internet registeries (RIRs)
@@ -202,7 +202,7 @@ for public ip addresses they are assigned by isps
 - RIRs like APNIC for asia then gives some ip blocks to ISPs
 - ISPs then assign ips by DHCP (Dynamic Host Configuration Protocol)
 
-## network Transmission methods :
+### network Transmission methods :
 
 **Unicast :** unicast transmission means one device sending a message to another device and the destination address is only of one device and source ip is always one only as packets can come from only one source
 - IPv4 unicast host address range is `1.1.1.1 to 223.255.255.255` but some addresses in between are reserved for different purposes
@@ -217,13 +217,13 @@ for public ip addresses they are assigned by isps
 - clients need to use a program to subscribe to a particular multicast group to receive the transmission
 - ospf routers which communicate with each other to find shortest path to reach some address reserve the multicast address `224.0.0.5`
 
-## Broadcast Domains and Segmentation :
+### Broadcast Domains and Segmentation :
 
 in ethernet lan broadcast is used with arp to find mac addresses of known ip addresses .also ip is mostly given by dhcp server so dhcp in a device first sends broadcast to find the dhcp server
 - broadcasts are forwarded by switches if the broadcast is in the same subnet with switches 
 - routers do not forward broadcasts
 
-### large broadcast domain :
+#### large broadcast domain :
 
 large broadcast domain like 400 users may generata excessive broadcast traffic which will slow down the devices .so we need to differentiate them using subnets.
 
@@ -235,16 +235,16 @@ large broadcast domain like 400 users may generata excessive broadcast traffic w
 
 subnetting reduces overall network traffic and improves network performance it also helps network administrators to keep different rules for different subnets also if anything abnormal happens in a broadcast like abnormat broadcast traffic or misconfiguration it will not affect all users
 
-### various ways of using subnets
+#### various ways of using subnets
 
 ![locosub](images/locosub.png) ![grpsub](images/grpsub.png) ![typesub](images/typesub.png)
 
-## Network Address Translation (NAT) :
+### Network Address Translation (NAT) :
 
 nat helps in changing your private ip into public ip for sending or receiving on the internet as we can't use our private ip to connect public ips
 - without nat we would have run out of ipv4 addresses if every device had its unique ip , nat on the router level gives every device same public ip but with different ports which is called pat (port address translation)
 
-## Special use ipv4 addresses :
+### Special use ipv4 addresses :
 
 addresses which cannot be assigned to hosts and some can be assigned but with restrictions
 
@@ -258,7 +258,7 @@ link-local addresses are self assigned addresses . windows self assign link loca
 - it is also called automatic private ip addressing (APIPA)
 - its range is from `169.254.0.1 to 169.254.255.254` (169.254.0.0/16)
 
-## Legacy Classfull Addressing :
+### Legacy Classfull Addressing :
 
 in 1981 ip addresses were assigned by classfull addressing defined in rfc 790 (https://tools.ietf.org/html/rfc790) . customers were allocated ip addresses based on classes A,B or C they divided it as :
 1. **Class A :** for extremely large networks with range `0.0.0.0 to 127.0.0.0` which supports more than 16 million host addresses per network
@@ -267,17 +267,17 @@ in 1981 ip addresses were assigned by classfull addressing defined in rfc 790 (h
 > Note : there is also class D as multicast multicast block from 224.0.0.0 to 239.0.0.0 and class E experimental block from 240.0.0.0 - 255.0.0.0 <br>
 At that time it was good for addressing but many ips were being unused as companies who needs only 500 ips got 65k ips hence classles addressing was introduced which can assign any number of ips 
 
-## Need of IPv6 :
+### Need of IPv6 :
 
 IPv4 was running out of addresses as it could have only 4.3 billion addresses . nat helped in slowing the exhaustion of ipv4 addresses but it has its limitations
 > IPv6 is the successor of IPv4 and it has larger 128-bit address space providing 340 undecillion possible addresses
 
-## IPv4 and IPv6 Co-existence :
+### IPv4 and IPv6 Co-existence :
 
 both ipv4 and ipv6 are co-existing nowadays it will take many years to fully convert to ipv6 
 - The IETF has created different protocols to help changing or migrating to ipv6 
 
-### 3 Types of Migration Techniques :
+#### 3 Types of Migration Techniques :
 
 1. **Dual Stack :** in dual stack a device has both IPv4 and IPv6 and it uses both to communicate . its called native ipv6 because it has IPv6 connection and can acces IPv6 content.
 2. **Tunneling :** in tunneling we transport ipv6 data over ipv4 network . ipv6 packets are encapsulated in ipv4 packets
@@ -290,20 +290,15 @@ both ipv4 and ipv6 are co-existing nowadays it will take many years to fully con
 
 > Note: tunneling and translation should be used only when needed , goal should be to migrate to IPv6.
 
-### Hexadecimal number system :
+#### Hexadecimal number system :
 
 hexadecimal number system has numbers 0-9 and letters A-F
 
 where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
 
-<details>
-<summary><strong>Hexadecimal Numbering System Table</strong></summary>
-
 ![hexadecimal](images/hexadecimal.png)
 
-</details>
-
-## IPv6 :
+### IPv6 :
 
 `3001:0da8:75a3:0000:0000:8a2e:0370:7334`
 - ipv6 addresses are of 128 bits in length and are written in strings of hexadecimal values `here 3001 is a string of hexadecimal values`
@@ -311,10 +306,10 @@ where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
 - ipv6 addresses are not case sensitive
 - ipv6 have eight 16 bit segments called hextets or four hexadecimal digits 
 
-## IPv6 formatting rules :
+### IPv6 formatting rules :
 as ipv6 is a large address we got 2 rules to make it shorter
 
-### Rule 1 : Omitting Leading Zeroes
+#### Rule 1 : Omitting Leading Zeroes
 
 - in the first rule we remove the zeroes from the hextets which are in the starting 
 - we dont remove zeroes if they are after any other digit 
@@ -328,7 +323,7 @@ and 0370 becomes 370
 compressed ip : 3001:da8:0:0:8a2e:370:7334
 ```
 
-### Rule 2 : Double Colon :
+#### Rule 2 : Double Colon :
 
 - in the second rule we remove the hextets which have only zeroes `0000` with double colons `::`
 - if two or more hextets with only zeroes are in a row we replace them all with just double colons
