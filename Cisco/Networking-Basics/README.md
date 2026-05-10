@@ -324,7 +324,7 @@ where decimal number 0-9 have hexadecimal values 0-9 and then from 10-15 its A-F
 
 ## IPv6 :
 
-```3001:0da8:75a3:0000:0000:8a2e:0370:7334```
+`3001:0da8:75a3:0000:0000:8a2e:0370:7334`
 - ipv6 addresses are of 128 bits in length and are written in strings of hexadecimal values `here 3001 is a string of hexadecimal values`
 - Every four bits is represented by single hexadecimal digit which makes total 32 (128/4) hexadecimal values `in 3001 each digit is a hexadecimal digit like 3,0 and 1`
 - ipv6 addresses are not case sensitive
