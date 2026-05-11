@@ -213,6 +213,8 @@ for public ip addresses they are assigned by isps
 - broadcast destination address is all 1s in the host portion means if the subnet is `255.255.255.0` for ip `192.168.0.1` then `192.168.0.255` is its broadcast address
 - a broadcast message only happens in a subnet if the subnet is `255.255.255.0` it sendds to all 254 devices and if its `255.255.0.0` it sends to all 60k devices
 - however they can be divided by different networks in a router like `192.168.1.x` and `192.168.2.x` , these are different networks with their own subnet masks `255.255.255.0`
+- we have 2 types of broadcast directed broadcast and limited broadcast , in limited broadcast the broadcast is sent to every network and every device on a network by using destination ip as `255.255.255.255`
+- whereas directed broadcast is sending broadcast to a specific network like `192.168.1.255` which will send broadcast to all the devices in the network `192.168.1`
 
 **Multicast :** in multicast transmission a device sends a message to all the devices which are subscribed to a multicast group
 - IPv4 has reserved the `224.0.0.0` to `239.255.255.255` addresses as multicast range.
@@ -365,4 +367,42 @@ here this ip becomes 2002:30f4::430e:0:0
 
 ---
 
+## Static and Dynamic Ip assignment :
 
+in static ip assignment user needs to assign ip manually by Entering these things
+1. ip adress
+2. subnet mask
+3.  default gateway (ip of router)
+- static addressing can be good for servers and printers so there ip doesn't change and other devices can find them easily
+- tho it gives increased control it is very time taking to do it for each device
+- when ips are entered manually host only performs basic error checks
+- when entering ips manually u will need to make a list of ips which are already assigned
+
+![Ipassign](images/ipassign.png)
+
+### DHCP :
+
+- dhcp (dynamic host control protocol) automatically assigns ip addresses and other configurations
+- dhcp is generally used everywhere to assign ip addresses automatically which also reduces staff burden and is error free
+- benefit of dhcp is it does not permanently assign ips but it will lease ips till the device is connected , when the device goes out of the range or is switched off there address is reused
+
+![dhcpip](images/dhcpip.png)
+
+**DHCP servers :** when we connect to wifi or ethernet the dhcp client in our device contacts dhcp server to get a ip
+- dhcp servers can be various devices like router or pc as long as they run dhcp service software
+- in home networks the router is both client and server it gets ip from isps dhcp server as a client and acts as a server for connected devices
+
+**Working :**
+
+1. first when a device is connected to the internet it sends a **DHCP discover** message which is a broadcast with destination ip 255.255.255.255 (all 1s) and mac address FF-FF-FF-FF-FF-FF
+> as when the device connects it doesnt know what ip is of the router or network (ex 19.168.0.1) so it uses 255.255.255.255 as destination ip which sends broadcasts to every network and device
+
+> if it used  192.168.0.255 it will send broadcast to only that network 192.168.0 and if the network was something else it wouldn't reach it
+
+> the destination mac address ensures message sent to every port
+
+Now all hosts on the server will receive this broadcat DHCP frame
+
+2. the dhcp server will receive the broadcast adn reply with **DHCP offer** with suggesting dhcp client with a ip .
+3. the dhcp client will reply with **Dhcp request** requesting to use the given ip details
+4. now the dhcp server will reply with **Dhcp acknowledgement** acknowledging the use of the ip
