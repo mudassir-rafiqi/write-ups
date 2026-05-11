@@ -373,6 +373,7 @@ in static ip assignment user needs to assign ip manually by Entering these thing
 1. ip adress
 2. subnet mask
 3.  default gateway (ip of router)
+
 - static addressing can be good for servers and printers so there ip doesn't change and other devices can find them easily
 - tho it gives increased control it is very time taking to do it for each device
 - when ips are entered manually host only performs basic error checks
@@ -395,14 +396,44 @@ in static ip assignment user needs to assign ip manually by Entering these thing
 **Working :**
 
 1. first when a device is connected to the internet it sends a **DHCP discover** message which is a broadcast with destination ip 255.255.255.255 (all 1s) and mac address FF-FF-FF-FF-FF-FF
+
 > as when the device connects it doesnt know what ip is of the router or network (ex 19.168.0.1) so it uses 255.255.255.255 as destination ip which sends broadcasts to every network and device
 
-> if it used  192.168.0.255 it will send broadcast to only that network 192.168.0 and if the network was something else it wouldn't reach it
+> if it used  192.168.0.255 it will send broadcast to only that network 192.168.0 and if the network was something else it wouldn't reach the dhcp srvr
 
 > the destination mac address ensures message sent to every port
 
 Now all hosts on the server will receive this broadcat DHCP frame
 
-2. the dhcp server will receive the broadcast adn reply with **DHCP offer** with suggesting dhcp client with a ip .
+2. the dhcp server will receive the broadcast and reply with **DHCP offer** with suggesting dhcp client with a ip .
 3. the dhcp client will reply with **Dhcp request** requesting to use the given ip details
+
+> Dhcp request is also a broadcast message first to reply the dhcp server that it would like to accept the ip and second to notify other dhcp servers it declined there offer
 4. now the dhcp server will reply with **Dhcp acknowledgement** acknowledging the use of the ip
+
+### Routers as gateways
+
+- routers provide gateway to connect local devices to devices outside the network
+- each host must know what is default gateway address of router
+- when wireless router is configured it automatically sends correct default gateway addresses to every device on the network
+- default gateway address can be manually configured or auto by DHCP
+- routers own internal ipv4 address is the default gateway address
+
+> router has a table in which it will map private ips with their public ips .also call as nat
+
+| Private IP Address | Public IP Address |
+| --- | --- |
+| `192.168.0.1` | `200.100.58.50` |
+| `192.168.1.15` | `200.100.58.51` |
+
+> when a local device has to send message to a device outside lan it sends the message with its source ip and the destination ip to default gateway address as:
+```
+source ip :192.168.0.1
+destination ip : 206.17.66.43
+```
+> when the router gets the message it uses it nat table and changes this header as :
+```
+source ip :200.100.58.50
+destination ip :206.17.66.43
+```
+>when the router receives the message back it will then check its nat table again and send the message to the respected ip
