@@ -431,9 +431,86 @@ Now all hosts on the server will receive this broadcat DHCP frame
 source ip :192.168.0.1
 destination ip : 206.17.66.43
 ```
-> when the router gets the message it uses it nat table and changes this header as :
+> when the router gets the message it uses its nat table and changes this header as :
 ```
 source ip :200.100.58.50
 destination ip :206.17.66.43
 ```
 >when the router receives the message back it will then check its nat table again and send the message to the respected ip
+
+# Mac Address :
+
+- Mac addresses are addresses assigned to a device NIC (network interface controller) and cannot be changed
+- Mac addresses help in locating a device in a LAN network
+- Mac addresses are used in layer 2 to deliver data frames
+- they are used to send data from one nic to another nic
+- Mac addresses are of 48 bits and hexadecimal digits are used to display them in six groups
+
+                                `00:1A:2B:3C:4D:5E`
+
+- the first 3 groups or 24 bits of mac addresses identify the company like apple intel etc
+- the last 3 groups of 24 bits are unique to the devices assigned by manufacturer
+
+## Mac address in delivering data
+
+### Delivering in the same network :
+- so mac addresses work in layer 2 by encapulating the ip packets from layer 2
+- mac addresses send data from nic to nic 
+- when delivering data in the same network the destination mac address is the destination device mac address 
+
+![mac1](images/mac1.png)
+
+here we can see when the pc1 wants to send some data to pc2 its header includes :
+
+1. source mac of pc1 and destination mac of pc2 (layer2)
+2. source ip of pc1 and destination ip of pc2 (layer3)
+
+### Delivering outside Lan or delivering on remote network :
+
+- when delivering a packet outside the lan we use router's mac address for destination mac address
+
+![remotemac1](image.png)
+
+- here if pc1 wants to deliver something to pc2 it will use destination mac of its router and ip of pc2 
+- when router receives the message it decodes the layer 2 information and uses ipv4 address to find best path to forward the packet
+- the router uses the destination ipv4 address to find next device to send the data by encapsulating the ip packets to data frames 
+
+- in this example router1 will encapsulate the packet with new layer 2 information as 
+
+![remotemac2](image-1.png)
+
+- now the new destination mac address becomes of router2's outside interface mac address
+- and the new source mac address is of router1's outside interface mac addresss
+- along each forwarding the ip packet is encapsulated in a frame
+- the next forwarding is the final destination so we use its mac address only
+
+> routers have different mac addresses for different interfaces so we dont have any issues
+
+![remotemac3](image-2.png)
+
+- finally the source mac is the router2's inside mac address and destination mac address is of the destination device pc2
+- this is how the mac addressses work in layer 2 for sending the info
+
+## Address Resolution protocol (ARP) :
+
+- when a device knows the ipv4 address of other device but it doesn't know its mac address it uses arp to find it
+
+**Arp uses 3 step process to do it :**
+
+1. the sending host creates and sends a frame to broadcast mac address (all 48 bits with 1s `ff:ff:ff:ff:ff:ff`) . the frame contains the ipv4 address it wants to find with a message like whose ip is this .
+2. each host will check if their ip is the ip asked in the message and the one with the matching ip will respond with its mac address to the sender host
+3. the sending host receives the msg and saves the mac address with its ip in a table called arp table
+
+example arp table
+
+| IP Address | MAC Address |
+| --- | --- |
+| `192.168.1.1` | `00:1A:2B:3C:4D:5E` |
+| `192.168.1.10` | `A4:C3:F0:12:34:56` |
+| `192.168.1.15` | `B8:27:EB:AA:BB:CC` |
+
+- when the host has both the destination ip and mac it can send directly to the device
+ 
+![alt text](ciscoarp.gif)
+
+> you can check arp table using `arp -a` in the cmd u can also ping 192.168.0.255 to ping all devices on the network ,use your own network instead of 192.168.0
