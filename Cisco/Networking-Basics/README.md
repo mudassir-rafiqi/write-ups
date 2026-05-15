@@ -612,9 +612,9 @@ ex : `192.168.1.5` wants to send to `192.168.3.7`
 
 - ports are broken into three categories and its range is 1 - 65,535 :
 
-1. Well-known ports :destination ports which are associated with common network applications range from 1 - 1023
-2. Registered ports : ports 1024 - 49151 can be used as both source and destination ports , companies can register ports for their specific applications
-3. Private Ports : ports 49152-65535 are source ports and can be used by any application
+1. **Well-known ports :** destination ports which are associated with common network applications range from 1 - 1023
+2. **Registered ports :** ports 1024 - 49151 can be used as both source and destination ports , companies can register ports for their specific applications
+3. **Private Ports :** ports 49152-65535 are source ports and can be used by any application
 
 > if well-known ports were't assigned clients would be confused bcz some apps may use port 80 for web browser and some may use it for file transfer
 
@@ -624,6 +624,6 @@ ex : `192.168.1.5` wants to send to `192.168.3.7`
 
 **some well-known ports :**
 
-![portnums](image.png)
+![portnums](images/portnums.png)
 
 some services like dns use both tcp and udp . they use udp for clients and tcp when dns servers communicate with each other
