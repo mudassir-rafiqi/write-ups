@@ -11,6 +11,8 @@ This repository contains my learning from the networking basics Course from cisc
 - [TCP/IP And OSI Model](#tcpip-and-osi-model-)
 - [Ethernet Switches](#ethernet-switches)
 - [IPv4 And IPv6](#ipv4-and-ipv6)
+- [Mac Address](#mac-address-)
+- [Routing](#routing)
 
 ---
 # Basics :
@@ -78,8 +80,11 @@ The **IEEE 802.11** standard gives rules for wlan environments
 - **Standard channel :** channels are specific frequency ranges , set to auto
 - **SSID Broadcast :** to show our wifi name to devices in range
 
- ---
+## LAN (local area networks) :
 
+- lan refers to local network or group of interconnected local networks which are under same administrative control
+
+ ---
 # Protocols and models :
 
 Protocols are rules used by networks to communicate with each other ,They include :
@@ -168,7 +173,7 @@ ethernet switches are like routers without wifi they have ethernet ports so devi
 
 ---
 
-## IPv4 And IPv6
+# IPv4 And IPv6
 
 Every device needs an ip address to connect to the internet and to send or receive anything . there is a private ip address in the lan network and public ip address to connect outside the lan
 - ip addresses are of 32 bits in length ,here is a binary representation : `11010001101001011100100000000001`
@@ -411,13 +416,15 @@ Now all hosts on the server will receive this broadcat DHCP frame
 > Dhcp request is also a broadcast message first to reply the dhcp server that it would like to accept the ip and second to notify other dhcp servers it declined there offer
 4. now the dhcp server will reply with **Dhcp acknowledgement** acknowledging the use of the ip
 
+---
+
 ### Routers as gateways
 
 - routers provide gateway to connect local devices to devices outside the network
 - each host must know what is default gateway address of router
 - when wireless router is configured it automatically sends correct default gateway addresses to every device on the network
 - default gateway address can be manually configured or auto by DHCP
-- routers own internal ipv4 address is the default gateway address
+- router's own internal ipv4 address is the default gateway address
 
 > router has a table in which it will map private ips with their public ips .also call as nat
 
@@ -438,6 +445,8 @@ destination ip :206.17.66.43
 ```
 >when the router receives the message back it will then check its nat table again and send the message to the respected ip
 
+---
+
 # Mac Address :
 
 - Mac addresses are addresses assigned to a device NIC (network interface controller) and cannot be changed
@@ -446,7 +455,7 @@ destination ip :206.17.66.43
 - they are used to send data from one nic to another nic
 - Mac addresses are of 48 bits and hexadecimal digits are used to display them in six groups
 
-                                `00:1A:2B:3C:4D:5E`
+                                00:1A:2B:3C:4D:5E
 
 - the first 3 groups or 24 bits of mac addresses identify the company like apple intel etc
 - the last 3 groups of 24 bits are unique to the devices assigned by manufacturer
@@ -491,6 +500,8 @@ here we can see when the pc1 wants to send some data to pc2 its header includes 
 - finally the source mac is the router2's inside mac address and destination mac address is of the destination device pc2
 - this is how the mac addressses work in layer 2 for sending the info
 
+---
+
 ## Address Resolution protocol (ARP) :
 
 - when a device knows the ipv4 address of other device but it doesn't know its mac address it uses arp to find it
@@ -511,6 +522,108 @@ example arp table
 
 - when the host has both the destination ip and mac it can send directly to the device
  
-![alt text](ciscoarp.gif)
+![alt text](images/ciscoarp.gif)
 
 > you can check arp table using `arp -a` in the cmd u can also ping 192.168.0.255 to ping all devices on the network ,use your own network instead of 192.168.0
+
+---
+
+# Routing 
+
+- routing is the process to find the best path to a destination
+- as routers connect layer 3 ip network they use ip to decide where to forward
+- also we need routing to send data if we divided our network in different subnets or networks 
+- whenever the network portion is not matched with the host portion router is used to send the message
+
+ex : `192.168.1.5` wants to send to `192.168.3.7`
+
+## Routing Tables
+
+- as routers work in layer 3 and need to find best path to send data across the network or internet they use routing tables 
+- routing tables are only concnerned with reaching a particular network not individual hosts
+- routing table has addresses of networks and best path to reach the network
+- Entries can be done manually by network admininstrator or dynamically/auto by information received by other networks
+- routers use routing table to determine which interface to use to forward a message to its destination
+- if router cannot determine where to forward a message it will drop it
+- network admins configure a static default route placed in routing table so packet will not be dropped due to destination network not in routing table
+
+> default route is a interface used to send a packet which its destination it cant find . the default route is 0.0.0.0
+
+**exampe routing table**
+ | Type | Network | Port |
+| --- | --- | --- |
+| `C` | `10.0.0.0/8` | `FastEthernet0/0` |
+| `C` | `172.16.0.0/16` | `FastEthernet0/1` |
+
+- type means the connection type.c means directly connected
+- network is network address
+- port is interface used to forward packets
+
+## Default gateway :
+
+- we know default gateway is uses by devices to reach outside the network
+- default gateway is mostly one in host portion like for `192.168.0` network it will be `192.168.0.1`
+- a device should know its default gateway ip address and mac address 
+- we can get mac using arp if we know the ip of the router
+
+# TCP And UDP :
+
+- Tcp an Udp work under transport layer and both deliver data segments in different styles
+
+## TCP (Transmission Control Protocol) :
+
+- tcp is reliable transport layer protocol and ensures that data is deliverd correctly and in sequence 
+- tcp breaks data into segments each segment has header with info about sequence number , port etc
+- before sending data tcp makes a connection with the receiver called **3-way handshake**
+
+**3-way handshake :**
+
+1. SYN (Synchronize) : first the sender will send a SYN segment to the receiver to request a connection
+2. SYN-ACK (Synchronise-Acknowledgement) : the receiver responds with SYN-ACK acknowledging request and receiving the connection
+3. ACK (Acknowledge) : now the sender confirms the connection by replying with an ACK
+
+- tcp uses sequence number to ensure data delivered accurately and in order
+- receiver also sends ACK for every segment or group of segment it receives correctly by this the sender knows the data was sent correctly
+- if the sender doesn't receive ACK for a segment it will resend that segment by assuming it was lost
+- tcp also controls the flow so that the sender doesn't send too fast for the receiver to handle
+- tcp also checks if any segments were corrupted and requests retransmission for the segments
+- used in web browsing,email,file transfer etc
+
+## UDP (User Datagram Protocol) :
+
+- Udp transports data faster than tcp but it doesn't check if it is arrived correctly
+- udp just sends data and doesn't care if it is arrived or not
+- it is used for real-time applications like live video streaming etc
+- udp doesnt adds sequence number to its segments
+- udp doesnt had 3 way handshake
+
+
+## Port Numbers :
+
+- port numbers are used to identify specific applications or services 
+- ip addresses identify a device , ports identify a service like http web services , port transfer
+- a device has many services so to access a specific service we use ports
+- port numbers for important services are registered and are default like port 80 is used for web browser
+- bcz ports for specific services are assigned clients know which port to use to use a service 
+- both sender and receiver use ports as sender also has many services running and the receiver will reply back to the port which sender used to send data
+- port numbers are assigned and managed by IANA (Internet Assigned Numbers Authority ) which comes under ICANN (internet coroporation for assigned names and numbers)
+
+> ex: if 192.168.1.1 wants to connect to a web browser (191.32.234.22) it will use random port 5320 to connect to 191.32.234.22:80 as 80 is used for http and the receiver will send back to 192.168.1.1:5320
+
+- ports are broken into three categories and its range is 1 - 65,535 :
+
+1. Well-known ports :destination ports which are associated with common network applications range from 1 - 1023
+2. Registered ports : ports 1024 - 49151 can be used as both source and destination ports , companies can register ports for their specific applications
+3. Private Ports : ports 49152-65535 are source ports and can be used by any application
+
+> if well-known ports were't assigned clients would be confused bcz some apps may use port 80 for web browser and some may use it for file transfer
+
+> ports are 65k only because when tcp and udp were made they had only 16 bits for ports that would be 65535 max numbers
+
+> registered ports can be used for personal apps but they may also get mix with some registered ports and we may get error port not found
+
+**some well-known ports :**
+
+![portnums](image.png)
+
+some services like dns use both tcp and udp . they use udp for clients and tcp when dns servers communicate with each other
