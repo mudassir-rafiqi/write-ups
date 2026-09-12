@@ -3,7 +3,8 @@
 Welcome to my technical write-ups.
 
 ## Sections
-- [Cisco Write-Ups](Cisco/README.md)
+- [Networking Basics](networking-basics/README.md)
+- [HTTP](HTTP/README.md)
 
 ## About
 Documenting my learning in networking and cybersecurity.
