@@ -3,7 +3,7 @@
 Welcome to my technical write-ups.
 
 ## Sections
-- [Networking Basics](networking-basics/README.md)
+- [Networking Basics](Networking-Basics/README.md)
 - [HTTP](HTTP/README.md)
 
 ## About
